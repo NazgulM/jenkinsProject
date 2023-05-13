@@ -3,7 +3,7 @@
 ## What is Jenkins?
 
 Jenkins is an open source continuous integration/continuous delivery and deployment (CI/CD) automation software DevOps tool written in the Java programming language. It is used to implement CI/CD workflows, called pipelines.
-Java needs to be installed to use jenkins.
+Java needs to be installed to use jenkins. You can use it freely, it supports a lot of plugins, Jenkins is used to build and test projects continuously making it easier for developers to integrate changes. 
 
 ```
 Amazon Linux
@@ -25,7 +25,8 @@ systemctl start jenkins
 systemctl status jenkins
 ```
 
-CI/CD 
+### CI/CD 
+
 A continuous integration and continuous deployment (CI/CD) pipeline is a series of steps that must be performed in order to deliver a new version of software. CI/CD pipelines are a practice focused on improving software delivery throughout the software development life cycle via automation.
 
 CI stands for Continuous Integration. This means that every time a developer pushes code changes to a shared repository, the changes are automatically built and tested to ensure they integrate correctly with the existing codebase.
@@ -42,6 +43,7 @@ If the changes pass all the tests, the CD server deploys them to production (if 
 
 By using CI/CD, developers can catch and fix issues earlier in the development process, reducing the risk of bugs and errors in production. It also helps to automate the deployment process, making it faster and more reliable.
 
+CI/CD is a method to frequently deliver apps to customers by introducing automation into the stages of continuos delivery, and continuous deployment. CI/CD is a solution to the problems integrating new code can cause for development and operations team.
 ## Create Job
 
 ### Freestyle Project
@@ -55,3 +57,4 @@ A pipeline is a way  of defining your entire build process using the code in the
 #### Multi-branch Pipeline
 
 Extension of a Pipeline job.
+
