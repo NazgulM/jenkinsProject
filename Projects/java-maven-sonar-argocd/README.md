@@ -87,3 +87,40 @@ java -jar target/spring-boot-web.jar
 
 ![works](works.png)
 
+Next Steps:
+The Docker way
+```
+sudo apt update
+
+Next, install a few prerequisite packages which let apt use packages over HTTPS:
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
+Then add the GPG key for the official Docker repository to your system:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+Add the Docker repository to APT sources:
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+Update your existing list of packages again for the addition to be recognized:
+sudo apt update
+
+Make sure you are about to install from the Docker repo instead of the default Ubuntu repo:
+apt-cache policy docker-ce
+
+Notice that docker-ce is not installed, but the candidate for installation is from the Docker repository for Ubuntu 22.04 (jammy).
+
+Finally, install Docker:
+sudo apt install docker-ce
+
+Docker should now be installed, the daemon started, and the process enabled to start on boot. Check that it’s running:
+sudo systemctl status docker
+
+Build the Docker Image
+
+docker build -t ultimate-cicd-pipeline:v1 .
+docker run -d -p 8010:8080 -t ultimate-cicd-pipeline:v1
+
+Access the application on http://<ip-address>:8010
+```
+
+
