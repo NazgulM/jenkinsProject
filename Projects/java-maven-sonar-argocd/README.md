@@ -27,7 +27,63 @@ trigger declarative Jenkins pipelines -> Using Maven as build language  build st
 
 Inside the Kuberenetes cluster -> deployed Argo Image Updator and Argo Cd -> Kubernetes controller -> Argo Image Updator -cont. monitor container registry -> it will pick the image and update that image and push to another repository -image, helm charts, customize yaml files -> Argo Cd it take new images and deploys to Kubernetes cluster.
 ```
+
 ![project](pr.png)
 
+```
+sudo apt update
+java -version
+Output
+Command 'java' not found, but can be installed with:
 
+sudo apt install default-jre              # version 2:1.11-72build1, or
+sudo apt install openjdk-11-jre-headless  # version 11.0.14+9-0ubuntu2
+sudo apt install openjdk-17-jre-headless  # version 17.0.2+8-1
+sudo apt install openjdk-18-jre-headless  # version 18~36ea-1
+sudo apt install openjdk-8-jre-headless   # version 8u312-b07-0ubuntu1
+
+sudo apt install default-jre
+java -version
+openjdk version "11.0.19" 2023-04-18
+OpenJDK Runtime Environment (build 11.0.19+7-post-Ubuntu-0ubuntu122.04.1)
+OpenJDK 64-Bit Server VM (build 11.0.19+7-post-Ubuntu-0ubuntu122.04.1, mixed mode, sharing)
+
+You may need the JDK in addition to the JRE in order to compile and run some specific Java-based software. To install the JDK, execute the following command, which will also install the JRE:
+sudo apt install default-jdk
+
+javac -version
+javac 11.0.19
+
+sudo update-alternatives --config java
+There is only one alternative in link group java (providing /usr/bin/java): /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+Nothing to configure.
+
+sudo update-alternatives --config javac
+There is only one alternative in link group javac (providing /usr/bin/javac): /usr/lib/jvm/java-11-openjdk-amd64/bin/javac
+Nothing to configure
+
+sudo nano /etc/environment
+JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+
+source /etc/environment
+
+echo $JAVA_HOME
+/usr/lib/jvm/java-11-openjdk-amd64
+
+# Install maven
+sudo apt install maven
+
+#Execute the Maven targets to generate the artifacts
+mvn clean package
+```
+
+Teh above maven target stores the artifacts to the target directory, can either execute the artifact on your local machine (or) run it as a Docker container.
+
+Execute locally (Java 11 needed) and access the application on http://localhost:8080
+
+```
+java -jar target/spring-boot-web.jar
+```
+
+![works](works.png)
 
