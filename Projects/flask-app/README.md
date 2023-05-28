@@ -51,3 +51,43 @@ systemctl status jenkins
 
 on webBrowser type IP:8080
 ![jenkins first page](jenkins1.png)
+
+Step 2: Set up version control Initialize git repository locally by running 
+```
+git init 
+
+Commit your code to the local repository.
+Create new repository on GitHub or any other platform of your choice.
+Once you have created the remote repository, add it as origin to your local repo:
+git remote add origin <remote-repo-url>
+
+Push your changes to the remote repo:
+$ git push -u origin master
+```
+
+Step 3: Configure Jenkins
+Install required plugins such as Git Plugin, Pipeline Plugin ,and Python Plugin.
+In Jenkins dashboard perform following actions:
+Click on New Item -> Enter name for project like 'flask-app' -> Select Pipeline from list.
+In pipeline section select ‘Pipeline script from SCM’ option under definition dropdown menu.
+Choose Git option from SCM dropdown.
+Provide URL of GitHub Repo and credentials if needed.
+Specify branch name where code is pushed (e.g., */master).
+Add Script Path by specifying path where you will keep jenkinsfile (Jenkinsfile).
+
+In test.py we are using the built-in unittest module in Python to define a test case called TestApp. We create a client object from our Flask application (app) in the setup method so that it can be used throughout each test.
+We have defined one simple test method called test_homepage() which checks if the homepage returns HTTP status code 200 and "Hello, World!" message.
+Finally at bottom we use conditional block ('if name == 'main'') which runs all declared tests whenever file is executed directly.
+You can write additional unit tests based on application requirements/complexity. These unit-tests should be comprehensive enough to cover most scenarios within your flask-app while ensuring consistent behaviour across different environments or releases
+
+requirements.txt
+```
+flask==1.1.2
+sqlalchemy==0.9.*
+marshmallow>=3.*
+```
+
+```
+pip install -r requirements.txt
+```
+
