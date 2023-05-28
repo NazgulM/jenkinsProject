@@ -8,12 +8,12 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'python tests.py'
+                sh 'python Projects/flask-app/test.py'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'python app.py'
+                sh 'python Projects/flask-app/app.py'
             }
         } 
     }
