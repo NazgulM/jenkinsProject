@@ -75,7 +75,15 @@ Provide URL of GitHub Repo and credentials if needed.
 Specify branch name where code is pushed (e.g., */master).
 Add Script Path by specifying path where you will keep jenkinsfile (Jenkinsfile).
 
+Then you should specify following values while configuring pipeline script:
+Repository URL:
+https://github.com/NazgulM/jenkinsProject.git
+(assuming .git extension)
+Branch specifier : */master (to always pick master branch)
+Script Path: flask-app/Jenkinsfile
+
 In test.py we are using the built-in unittest module in Python to define a test case called TestApp. We create a client object from our Flask application (app) in the setup method so that it can be used throughout each test.
+
 We have defined one simple test method called test_homepage() which checks if the homepage returns HTTP status code 200 and "Hello, World!" message.
 Finally at bottom we use conditional block ('if name == 'main'') which runs all declared tests whenever file is executed directly.
 You can write additional unit tests based on application requirements/complexity. These unit-tests should be comprehensive enough to cover most scenarios within your flask-app while ensuring consistent behaviour across different environments or releases
@@ -85,6 +93,8 @@ requirements.txt
 flask==1.1.2
 sqlalchemy==0.9.*
 marshmallow>=3.*
+itsdangerous==2.0.1
+werkzeug==2.0.3
 ```
 
 ```
