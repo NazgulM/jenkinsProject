@@ -188,3 +188,5 @@ Also if we check the console output of our 4th Build we should notice the line s
 
 ![enf](end.png)
 
+We learned how to containerize a Flask application with Docker, using Git for version control, and automate the build, test, and deployment process with Jenkins, also we learned how to push the Docker Image to DockerHub.In the end, we also showed how Jenkins detected any code changes using the powerful Webhook.
+
