@@ -228,4 +228,12 @@ find / -name context.xml
 /root/apache-tomcat-10.1.9/webapps/host-manager/META-INF/context.xml
 /root/apache-tomcat-10.1.9/webapps/manager/META-INF/context.xml
 
+nano /opt/tomcat/webapps/host-manager/META-INF/context.xml
+
+![hostmanager/context.xml](hostManager.png)
+
+Specify the roles and the users:
+Browse to the conf directory and open the tomcat-users.xml for editing.
+
+find / -name context.xml
 
