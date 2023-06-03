@@ -20,3 +20,6 @@ Second job:
 You can add the post build action: build other projects, build other projects when current job is done.
 
 ![post](postbuild.png)
+
+In a Jenkins, we can install various of plugins like Kubernetes, Jenkins has tons of plugins, some companies put restriction to install plugins due to security issues. 
+
