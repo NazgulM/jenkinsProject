@@ -262,3 +262,71 @@ Configure the tomcat server with credentials
 Now let’s first install the Deploy to Container plugin. Go to manage Jenkins > Manage Plugins:
 
 ![deploy container](deploy.png) 
+
+
+Now let’s configure Tomcat with credentials. For that go to Manage Jenkins and under security select Credentials, add user and password which was used in tomcat server
+
+![add](addCred.png)
+
+Step 6: Deploy a Java application on a remote Tomcat Server
+In this step we would first create a new job in Jenkins, provide the URL of our GitHub repository from where the source code would be pulled, then Maven will be used to build the project and finally, we will deploy the project on the tomcat server all using the CI server named Jenkins.
+
+Here let’s create a new job from scratch:
+![job](job.png)
+
+Now let’s configure our new job. Under General provide the description of your choice:
+
+![job1](job1.png)
+
+Under Source Code Management, paste the URL of your GitHub code repository, you can leave the credentials as blank as this is a public repository and mention the branch of your repo, in my case it’s Master.
+
+![job2](jb2.png)
+
+Under Build Settings, under Root POM mention the pom.xml which should be present in our Git code repository. Under Goals and Options. provide clean install package name which will install the necessary packages and install them in our local repository.
+
+![job3](job3.png)
+
+Now we need to deploy our code, so under Build Settings, select Deploy war/ear to a container, and then under Post-build Actions provide the necessary details like a path to the war file, tomcat server credentials, and URL, as shown in the screenshot:
+
+![job4](job4.png)
+
+Finally, click on Apply and Save.
+
+Now let’s finally Build our code which would eventually copy the Artifacts to the tomcat server.
+
+Click on Build now on the Jenkins UI to trigger the build:
+
+After clicking on Build Now if we check the console output we can notice that the Build is successful and Jenkins was successfully able to deploy the WAR file onto the tomcat server as shown below:
+
+![job5](job5.png)
+
+If we access our tomcat server Manager App we can notice the presence of a new directory named /webapp:
+
+![job6](job6.png)
+
+and if we click on the webapp link, it will display the below page:
+
+![webapp](web.png)
+
+Jenkins has provided many options to automate the build trigger process and one of them is Poll SCM.
+
+What is polling the SCM?
+“Poll SCM” polls the SCM periodically for checking if any changes/ new commits were made and shall build the project if any new commits were pushed since the last build.
+
+Configure Poll SCM in Jenkins:
+
+Go to the previous job we created in the previous steps and click on configure:
+
+![poll](pollScm.png)
+
+Now do some changes in your source code and without our intervention the Jenkins build process should be triggered automatically and build the code.
+
+After making some changes in my code the build got triggered and checking the console output shows the build has been started by SCM and is successful rather than by the Admin (in an earlier case):
+
+![build](build1.png)
+
+![build2](build.png)
+
+If we access our Tomcat server from our browser we should see the new changes we did:
+
+![last](last.png)
