@@ -230,10 +230,35 @@ find / -name context.xml
 
 nano /opt/tomcat/webapps/host-manager/META-INF/context.xml
 
-![hostmanager/context.xml](hostManager.png)
+![hostmanager-context.xml](hostManager.png)
 
 Specify the roles and the users:
 Browse to the conf directory and open the tomcat-users.xml for editing.
 
 find / -name context.xml
 
+![roles](roles.png)
+![tomcat-users](tomcat-users.png)
+
+If you have errors : Connection refuse go to 
+nano /opt/tomcat/conf/server.xml
+
+add: useIPVHosts="true"
+<Connector port="8090" protocol="HTTP/1.1" 
+           connectionTimeout="20000" 
+           URIEncoding="UTF-8"
+           redirectPort="8443"
+           useIPVHosts="true" />
+
+Restart tomcat
+./shutdown.sh
+./startup.sh
+It should work
+```
+
+Step 5: Integrate Tomcat with Jenkins
+Install “Deploy to container” plugin on Jenkins UI
+Configure the tomcat server with credentials
+Now let’s first install the Deploy to Container plugin. Go to manage Jenkins > Manage Plugins:
+
+![deploy container](deploy.png) 
