@@ -15,12 +15,22 @@ spec:
     '''
 
 
-tfvars = '''
-    ami_id = "ami-092b51d9008adea15"
+tfvars = """
+    region = "${params.region}"
+    ami_id = "${params.ami_id}"
     instance_type = "t2.micro"
-    availability_zone = "us-east-2a"
-    key_name = "my_mini"
-'''
+    availability_zone = "${params.az}"
+    key_name = ${params.key_pair}
+"""
+
+        
+properties([
+    parameters([
+        choice(choices: ['apply', 'destroy'], description: 'pick the action', name: 'action'),
+        choice(choices: ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2'], description: 'Pick the region', name: 'region'), 
+        string(description: 'Enter ami_id: ', name: 'ami_id', trim: true), 
+        string(description: 'Enter availability zone: ', name: 'az', trim: true), 
+        string(description: 'Enter your key_pair: ', name: 'key_pair', trim: true)])])
 
 podTemplate(cloud: 'kubernetes', label: 'terraform', yaml: template) {
     node ('terraform') {
@@ -31,14 +41,24 @@ podTemplate(cloud: 'kubernetes', label: 'terraform', yaml: template) {
 
     withCredentials([usernamePassword(credentialsId: 'aws-creds', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
     stage('Init') {
-        sh 'terraform init'
+        sh "terraform init -backend-config='key=${params.region}/${params.az}/terraform.tfstate'"
     }
     
+    if (params.action == "apply") {
     stage ('terraform apply') {
         writeFile file: 'hello.tfvars', text: tfvars
         sh 'terraform apply -var-file hello.tfvars --auto-approve'
     }
+    }
+    
+    else {
+    stage ('terraform destroy') {
+        writeFile file: 'hello.tfvars', text: tfvars
+        sh 'terraform destroy -var-file hello.tfvars --auto-approve'
+    }
 }  
+    
         }
+}
 }
 }
